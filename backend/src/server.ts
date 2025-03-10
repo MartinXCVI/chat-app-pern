@@ -2,6 +2,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import prisma from './config/prisma.js'
+import cookieParser from 'cookie-parser'
 import { validateEnvVariables } from './utils/validateEnvVariables.js'
 
 /* ROUTES IMPORTS */
@@ -19,6 +20,8 @@ const app = express()
 const PORT: number = Number(process.env.PORT || 5000)
 
 /* MIDDLEWARES */
+// For parsing cookies
+app.use(cookieParser())
 // For parsing application/json
 app.use(express.json())
 
