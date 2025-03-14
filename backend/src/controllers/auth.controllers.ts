@@ -12,13 +12,12 @@ import { ISignUpRequestBody } from "../interfaces/ISignUpRequestBody"
 
 
 /**
- * @description:
- * Returns the current authenticated user's data.
- * Uses req.user which is populated by the protectRoute middleware.
- * No database query needed as user data is already available from the middleware.
- * 
- * @route: /me
- * @method: GET
+ * @description - Returns the current authenticated user's data.
+    Uses req.user which is populated by the protectRoute middleware.
+    No database query needed as user data is already available from the middleware.
+ * @route - /me
+ * @method - GET
+ * @access - Private
 */
 export const getMe = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -39,9 +38,12 @@ export const getMe = async (req: Request, res: Response): Promise<any> => {
 
 
 /**
-* @description: creates/registers a new user
-* @route: /signup
-* @method: POST
+* @description - Creates a new user account with the provided credentials. Validates input data,
+  checks for existing username, hashes the password, assigns a gender-based avatar,
+  and returns a JWT token for immediate authentication upon successful registration.
+* @route - /signup
+* @method - POST
+* @access - Public
 */
 export const signUp = async (req: Request<ISignUpRequestBody>, res: Response): Promise<any> => {
   // Getting the request data
@@ -110,9 +112,12 @@ export const signUp = async (req: Request<ISignUpRequestBody>, res: Response): P
 
 
 /**
-* @description: Login user by email
-* @route: /login
-* @method: POST
+* @description - Authenticates a user by validating username and password.
+  Upon successful authentication, generates a JWT token stored in an HTTP-only cookie
+  and returns basic user profile info.
+* @route - /login
+* @method - POST
+* @access - Public
 */
 export const login = async (req: Request, res: Response): Promise<any> => {
   // Getting the request body data
@@ -166,9 +171,11 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
 
 /**
-* @description: Logs out the user
-* @route: /logout
-* @method: POST
+  @description Logs out the current user by invalidating their authentication token.
+  Clears the JWT cookie and returns a confirmation message.
+* @route - /logout
+* @method - POST
+* @access - Private
 */
 export const logout = (req: Request, res: Response): any => {
   try {
@@ -180,7 +187,7 @@ export const logout = (req: Request, res: Response): any => {
     })
     return res.status(200).json({
       success: true,
-      message: "User successfully logged out"
+      message: "User successfully logged out. All cookies were cleared!"
     })
   } catch(error: any) {
     console.error(`Error in user logout: ${error.message || error}`)
