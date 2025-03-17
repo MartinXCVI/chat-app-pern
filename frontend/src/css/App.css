@@ -1,5 +1,37 @@
-html {
-  background-color: pink !important;
+.label-text {
+  color: white;
+}
+
+.chat-container {
+  min-height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-hour {
+  margin-top: 0.25rem;
+}
+
+.login-container, .signup-container {
+  min-height: 100vh;
+}
+
+.form-div {
+  margin-bottom: 0.5rem;
+}
+
+/*---------- MEDIA QUERIES ----------*/
+@media all and (max-width: 767px) {
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .users-sidebar {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */

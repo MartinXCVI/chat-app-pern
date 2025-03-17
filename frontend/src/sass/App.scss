@@ -1,3 +1,36 @@
-html {
-  background-color: pink !important; // Test
+@use './includes/mixins' as mx;
+
+.label-text {
+  color: white;
+}
+
+.chat-container {
+  min-height: 95vh;
+  @include mx.flexRowCenter();
+}
+
+.message-hour {
+  margin-top: 0.25rem;
+}
+
+.login-container, .signup-container {
+  min-height: 100vh;
+}
+
+.form-div {
+  margin-bottom: 0.5rem;
+}
+
+/*---------- MEDIA QUERIES ----------*/
+
+
+@media all and (max-width: 767px) {
+  
+  .chat-container {
+    @include mx.flexColCenter();
+  }
+
+  .users-sidebar {
+    width: 100%;
+  }
 }
