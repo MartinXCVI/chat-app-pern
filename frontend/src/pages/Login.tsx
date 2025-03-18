@@ -1,6 +1,22 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import { FormEvent } from "react"
+import useLogin from "../hooks/useLogin"
 
 const Login = () => {
+
+	const [inputs, setInputs] = useState({
+		username: "",
+		password: "",
+	})
+
+	const { loading, login } = useLogin()
+
+	const handleSubmitLoginForm = (event: FormEvent)=> {
+		event.preventDefault()
+		// Passing the values to the login function
+		login(inputs.username, inputs.password)
+	}
 
 	return (
 		<div className='login-container flex flex-col items-center justify-center mx-auto'>
@@ -9,12 +25,18 @@ const Login = () => {
 					Login —<span className='text-emerald-500'> ChatApp</span>
 				</h1>
 
-				<form>
+				<form onSubmit={handleSubmitLoginForm}>
 					<div className="form-div">
 						<label className='label p-2 '>
 							<span className='text-base label-text'>Username</span>
 						</label>
-						<input type='text' placeholder='Enter username' className='w-full input input-bordered h-10' />
+						<input
+							type='text'
+							placeholder='Enter username'
+							className='w-full input input-bordered h-10'
+							value={inputs.username}
+							onChange={(event)=> setInputs({ ...inputs, username: event.target.value })}
+						/>
 					</div>
 
 					<div className="form-div">
@@ -25,6 +47,8 @@ const Login = () => {
 							type='password'
 							placeholder='Enter Password'
 							className='w-full input input-bordered h-10'
+							value={inputs.password}
+							onChange={(event)=> setInputs({ ...inputs, password: event.target.value })}
 						/>
 					</div>
 					<Link
@@ -35,7 +59,12 @@ const Login = () => {
 					</Link>
 
 					<div>
-						<button className='btn btn-block btn-sm mt-2'>Login</button>
+						<button
+							className='btn btn-block btn-sm mt-2'
+							disabled={loading}
+						>
+							{ loading ? "Loading..." : "Login" }
+						</button>
 					</div>
 				</form>
 			</div>

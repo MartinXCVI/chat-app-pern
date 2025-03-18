@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from "react"
 import { useState } from "react"
 import { AuthUserType } from "../types/AuthUserType"
 import { AuthContext } from "./AuthContext"
+import toast from "react-hot-toast"
 
 
 export const AuthContextProvider = ( { children }: { children: ReactNode } ) => {
@@ -17,7 +18,7 @@ export const AuthContextProvider = ( { children }: { children: ReactNode } ) => 
       )
       const data = await res.json()
       if(!res.ok) {
-        throw new Error(data.error)
+        throw new Error(data.message)
       }
       setAuthUser(data)
     } catch(error: unknown) {
@@ -25,6 +26,7 @@ export const AuthContextProvider = ( { children }: { children: ReactNode } ) => 
         console.error(`Error fetching auth user: ${error.message}`)
       } else {
         console.error(`Error fetching auth user: ${error}`)
+        toast.error(String(error))
       }
     } finally {
       setIsLoading(false)
