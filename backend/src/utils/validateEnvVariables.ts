@@ -4,7 +4,8 @@ export function validateEnvVariables() {
   const requiredEnvVars: (keyof IEnvVariables)[] = [
     "NODE_ENV",
     "DATABASE_URL",
-    "JWT_SECRET"
+    "JWT_SECRET",
+    "PORT"
   ]
   // Filtering missin env variables
   const missingVars = requiredEnvVars.filter((key) => !process.env[key])
