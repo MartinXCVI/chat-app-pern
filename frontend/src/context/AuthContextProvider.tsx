@@ -14,13 +14,13 @@ export const AuthContextProvider = ( { children }: { children: ReactNode } ) => 
     try {
       const res = await fetch(
         "/api/auth/me",
-        // { credentials: "include" }
+        { credentials: "include" }
       )
       const data = await res.json()
       if(!res.ok) {
         throw new Error(data.message)
       }
-      setAuthUser(data)
+      setAuthUser(data.user)
     } catch(error: unknown) {
       if(error instanceof Error) {
         console.error(`Error fetching auth user: ${error.message}`)

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { FormEvent } from "react"
 import useSignUp from "../hooks/useSignUp"
 import toast from "react-hot-toast"
+import LoadingSpinner from "../components/LoadingSpinner"
 
 const SignUp = () => {
 
@@ -110,7 +111,7 @@ const SignUp = () => {
 							disabled={loading}
 							aria-disabled={loading}
 						>
-							{ loading ? "Loading..." : "Sign Up" }
+							{ loading ? <>Loading... <LoadingSpinner /></> : "Sign Up" }
 						</button>
 					</div>
 				</form>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { FormEvent } from "react"
 import useLogin from "../hooks/useLogin"
+import LoadingSpinner from "../components/LoadingSpinner"
 
 const Login = () => {
 
@@ -63,7 +64,7 @@ const Login = () => {
 							className='btn btn-block btn-sm mt-2'
 							disabled={loading}
 						>
-							{ loading ? "Loading..." : "Login" }
+							{ loading ? <>Loading... <LoadingSpinner /></> : "Login" }
 						</button>
 					</div>
 				</form>
