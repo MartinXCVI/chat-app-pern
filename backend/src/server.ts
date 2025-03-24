@@ -16,7 +16,7 @@ dotenv.config()
 validateEnvVariables()
 
 /* EXPRESS APP */
-const app = express()
+import { app, server } from './socket/socket.js'
 const PORT: number = Number(process.env.PORT || 5000)
 
 /* MIDDLEWARES */
@@ -35,7 +35,7 @@ const startServer = async (): Promise<void> => {
   try {
     await prisma.$connect()
     console.log('Database successfully connected')
-    app.listen(PORT, ()=> {
+    server.listen(PORT, ()=> {
       console.log(`Server listening on port ${PORT}...`)
     })
   } catch(error: any) {
