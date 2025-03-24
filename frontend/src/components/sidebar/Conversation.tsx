@@ -1,10 +1,13 @@
+import { useSocketContext } from "../../hooks/useSocketContext";
 import useConversation from "../../store/useConversation";
 
 const Conversation = ({ conversation }: { conversation: ConversationType }) => {
 
 	const { selectedConversation, setSelectedConversation } = useConversation()
 	const isSelected = selectedConversation?.id === conversation.id
-	const isOnline = false
+
+	const { onlineUsers } = useSocketContext()
+	const isOnline = onlineUsers.includes(conversation.id)
 
 	return (
 		<>
@@ -13,7 +16,7 @@ const Conversation = ({ conversation }: { conversation: ConversationType }) => {
 					cursor-pointer ${isSelected ? "bg-emerald-500" : ""}`}
 				onClick={()=> setSelectedConversation(conversation)}
 			>
-				<div className={`avatar ${isOnline ? "online" : ""}`}>
+				<div className={`avatar ${isOnline ? "avatar-online" : "avatar-offline"}`}>
 					<div className='w-8 md:w-12 rounded-full'>
 						<img src={conversation.profilePic} alt='user avatar' />
 					</div>
@@ -25,7 +28,7 @@ const Conversation = ({ conversation }: { conversation: ConversationType }) => {
 					</div>
 				</div>
 			</div>
-
+			{/* Divider line div */}
 			<div className='divider my-0 py-0 h-1' />
 		</>
 	)
