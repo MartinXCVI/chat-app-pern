@@ -13,7 +13,7 @@ function App() {
   if(isLoading) return null;
 
   return (
-    <div className="p-4 flex items-center justify-center">
+    <div className="chat-app-wrapper p-4 flex items-center justify-center">
       <Routes>
         <Route path="/" element={authUser ? <Home /> : <Navigate to={"/login"} />} />
         <Route path="/signup" element={!authUser ? <SignUp /> : <Navigate to={"/"} />} />

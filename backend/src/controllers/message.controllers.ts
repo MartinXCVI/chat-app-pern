@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 import prisma from '../config/prisma.js'
+import { getReceiverSocketId } from '../socket/socket.js'
+import { io } from '../socket/socket.js'
 
 /**
  * @description - Retrieves all messages between the authenticated user and another user
@@ -190,13 +192,13 @@ export const sendMessage = async (req: Request, res: Response): Promise<any> => 
         })
       }
       
-      /* Socket.io logic to be added here later */
-
-      // Successful response with consistent structure
-      return res.status(201).json({
-        success: true,
-        data: newMessage
-      })
+      /* Socket.io logic here */
+      const receiverSocketId = getReceiverSocketId(receiverId)
+      if(receiverSocketId) {
+        io.to(receiverSocketId).emit("newMessage", newMessage)
+      }
+      // Successful response
+      return res.status(201).json(newMessage)
     }) // End of transaction return statement
   } catch(error: any) {
     console.error(`Error in sending message: ${error.message || error}`)

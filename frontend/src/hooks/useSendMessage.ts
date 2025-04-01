@@ -9,7 +9,7 @@ const useSendMessage = () => {
 	const { messages, setMessages, selectedConversation } = useConversation()
 
 	const sendMessage = async (message: string) => {
-		if (!selectedConversation) return;
+		if(!selectedConversation) return;
 		setLoading(true)
 		// Attempting to send the message
 		try {
@@ -18,9 +18,7 @@ const useSendMessage = () => {
 				"POST",
 				{ message }
 			)
-			console.log("Message data:", data)
 			if (data.error) throw new Error(data.error)
-			
 			setMessages([...messages, data])
 		} catch (error: unknown) {
 			handleError(error)

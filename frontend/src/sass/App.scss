@@ -1,11 +1,23 @@
 @use './includes/mixins' as mx;
 
+.chat-app-wrapper {
+  min-height: 100vh;
+}
+
 .label-text {
   color: white;
 }
 
 .chat-container {
-  min-height: 95vh;
+  min-height: 85vh;
+  max-height: 85vh;
+  @include mx.flexRowCenter();
+}
+
+.messages-container {
+  width: 100%;
+  min-height: 85vh;
+  max-height: 85vh;
   @include mx.flexRowCenter();
 }
 
@@ -19,6 +31,11 @@
 
 .form-div {
   margin-bottom: 0.5rem;
+}
+
+.users-sidebar {
+  min-height: 85vh;
+  max-height: 85vh;
 }
 
 /*---------- MEDIA QUERIES ----------*/

@@ -19,6 +19,8 @@ const useGetMessages = () => {
         setMessages(data.messages)
       } catch(error: unknown) {
         handleError(error)
+      } finally {
+        setLoading(false)
       }
     }
     getMessages()
